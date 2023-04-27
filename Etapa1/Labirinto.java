@@ -1,6 +1,5 @@
 package Etapa1;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.nio.file.Files;
@@ -16,10 +15,6 @@ public class Labirinto {
     }
 
     public void criaLabirinto(String filename) {
-        System.out.println("Caminho do projeto: " + System.getProperty("user.dir"));
-        File file = new File(System.getProperty("user.dir") + File.separator + filename);
-        System.out.println("Caminho absoluto do arquivo: " + file.getAbsolutePath());
-
         ArrayList<String> linhasLabirinto = new ArrayList<>();
     
         try {
@@ -35,7 +30,11 @@ public class Labirinto {
     
         for (int i = 0; i < linhas; i++) {
             for (int j = 0; j < colunas; j++) {
-                labirinto[i][j] = linhasLabirinto.get(i).charAt(j);
+                if (j < linhasLabirinto.get(i).length()) {
+                    labirinto[i][j] = linhasLabirinto.get(i).charAt(j);
+                } else {
+                    labirinto[i][j] = ' ';
+                }
             }
         }
     }
@@ -64,5 +63,14 @@ public class Labirinto {
     
         labirinto[i][j] = ' ';
         return false;
+    }
+
+    public void imprimirLabirinto() {
+        for (int i = 0; i < linhas; i++) {
+            for (int j = 0; j < colunas; j++) {
+                System.out.print(labirinto[i][j]);
+            }
+            System.out.println();
+        }
     }    
 }
